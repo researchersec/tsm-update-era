@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realm Data - Last Modified</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            font-size: 24px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .loading {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Realm Data Last Modified Dates</h1>
+    <div id="loading" class="loading">Loading data...</div>
+    <table id="realmTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>Realm Name</th>
+                <th>Auction House Type</th>
+                <th>Last Modified</th>
+            </tr>
+        </thead>
+        <tbody id="realmData"></tbody>
+    </table>
+    <div id="error" class="error" style="display: none;"></div>
+
+    <script>
+        async function loadRealmData() {
+            try {
+                // Update the path to your JSON file as needed
+                const response = await fetch('2025-07-08_23-01-17.json');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch JSON data');
+                }
+                const data = await response.json();
+                const realms = data.realm_data.items;
+
+                const tbody = document.getElementById('realmData');
+                tbody.innerHTML = ''; // Clear any existing data
+
+                realms.forEach(realm => {
+                    realm.auctionHouses.forEach(auction => {
+                        const row = document.createElement('tr');
+                        const date = new Date(auction.lastModified * 1000);
+                        const formattedDate = date.toLocaleString('en-GB', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            timeZoneName: 'short'
+                        });
+
+                        row.innerHTML = `
+                            <td>${realm.name}</td>
+                            <td>${auction.type}</td>
+                            <td>${formattedDate}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                });
+
+                // Hide loading and show table
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('realmTable').style.display = 'table';
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                const errorDiv = document.getElementById('error');
+                errorDiv.textContent = `Error: ${error.message}`;
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        // Load data when the page loads
+        window.onload = loadRealmData;
+    </script>
+</body>
+</html>
