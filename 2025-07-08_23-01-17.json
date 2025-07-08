@@ -1,0 +1,66 @@
+{
+    "realm_data": {
+        "metadata": {
+            "totalItems": 3
+        },
+        "items": [
+            {
+                "realmId": 1809,
+                "regionId": 26,
+                "name": "Thunderstrike",
+                "localizedName": "Thunderstrike",
+                "locale": "en_GB",
+                "auctionHouses": [
+                    {
+                        "auctionHouseId": 559,
+                        "type": "Alliance",
+                        "lastModified": 1752014487
+                    },
+                    {
+                        "auctionHouseId": 560,
+                        "type": "Horde",
+                        "lastModified": 1752012001
+                    }
+                ]
+            },
+            {
+                "realmId": 1810,
+                "regionId": 26,
+                "name": "Spineshatter",
+                "localizedName": "Spineshatter",
+                "locale": "en_GB",
+                "auctionHouses": [
+                    {
+                        "auctionHouseId": 561,
+                        "type": "Alliance",
+                        "lastModified": 1752010803
+                    },
+                    {
+                        "auctionHouseId": 562,
+                        "type": "Horde",
+                        "lastModified": 1752011804
+                    }
+                ]
+            },
+            {
+                "realmId": 1811,
+                "regionId": 26,
+                "name": "Soulseeker",
+                "localizedName": "Soulseeker",
+                "locale": "en_GB",
+                "auctionHouses": [
+                    {
+                        "auctionHouseId": 563,
+                        "type": "Alliance",
+                        "lastModified": 1752011160
+                    },
+                    {
+                        "auctionHouseId": 564,
+                        "type": "Horde",
+                        "lastModified": 1752009526
+                    }
+                ]
+            }
+        ]
+    }
+}
